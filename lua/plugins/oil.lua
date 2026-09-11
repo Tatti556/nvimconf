@@ -2,8 +2,10 @@ return {
   {
     "stevearc/oil.nvim",
 
-    -- Oilは起動時に読み込む
+    -- Oilは必要時に読み込む
     lazy = true,
+    event = "VeryLazy",
+    cmd = { "Oil" },
 
     -- ファイルアイコン表示用
     dependencies = {
@@ -33,6 +35,11 @@ return {
 
     -- Normalモードで - を押すと親ディレクトリへ移動
     keys = {
+      {
+        "<leader>e",
+        "<CMD>Oil<CR>",
+        desc = "Oilを開く",
+      },
       {
         "-",
         "<CMD>Oil<CR>",

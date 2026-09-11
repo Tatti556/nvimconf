@@ -16,3 +16,5 @@ vim.opt.splitbelow = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.updatetime = 250
+
+vim.opt.clipboard = "unnamedplus"
