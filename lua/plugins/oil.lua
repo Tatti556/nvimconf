@@ -2,6 +2,9 @@ return {
   {
     "stevearc/oil.nvim",
 
+    -- VSCode NeovimではOilを使わない
+    cond = not vim.g.vscode,
+
     -- Oilは必要時に読み込む
     lazy = true,
     event = "VeryLazy",
