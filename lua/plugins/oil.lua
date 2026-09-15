@@ -34,6 +34,19 @@ return {
       view_options = {
         show_hidden = true,
       },
+      
+      -- 競合キーを無効化, vertical splitとhorizontal splitの別割り当て
+      keymaps = {
+        ["<C-h>"] = false,
+        ["<C-l>"] = false,
+
+        ["<leader>sv"] = "actions.split",
+        opts = { vertical = true, },
+        desc = "垂直分割で開く",
+        ["<leader>sh"] = "actions.horizontal_split",
+        opts = { vertical = false, },
+        desc = "水平分割で開く",
+      },
     },
 
     -- Normalモードで - を押すと親ディレクトリへ移動

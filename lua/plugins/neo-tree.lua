@@ -5,6 +5,7 @@ return {
 
     -- Oilとは別キーで必要時に起動する
     cmd = { "Neotree" },
+
     keys = {
       {
         "<leader>n",
@@ -23,6 +24,18 @@ return {
       filesystem = {
         -- Oilのdefault_file_explorerと競合させない
         hijack_netrw_behavior = "disabled",
+      },
+
+      window = {
+        mappings = {
+          -- splitで開く
+          ["<leader>sv"] = "open_vsplit",
+          ["<leader>sh"] = "open_split",
+          
+          -- 競合キーを無効化
+          ["s"] = "none",
+          ["S"] = "none",
+        },
       },
     },
   },
