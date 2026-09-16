@@ -1,3 +1,4 @@
+
 return {
   {
     "stevearc/oil.nvim",
@@ -5,9 +6,7 @@ return {
     -- VSCode NeovimではOilを使わない
     cond = not vim.g.vscode,
 
-    -- Oilは必要時に読み込む
-    lazy = true,
-    event = "VeryLazy",
+    -- コマンドまたはキーマップ使用時に読み込む
     cmd = { "Oil" },
 
     -- ファイルアイコン表示用
@@ -34,31 +33,41 @@ return {
       view_options = {
         show_hidden = true,
       },
-      
-      -- 競合キーを無効化, vertical splitとhorizontal splitの別割り当て
+
       keymaps = {
+        -- ウィンドウ移動キーとの競合を回避
         ["<C-h>"] = false,
         ["<C-l>"] = false,
 
-        ["<leader>sv"] = "actions.split",
-        opts = { vertical = true, },
-        desc = "垂直分割で開く",
-        ["<leader>sh"] = "actions.horizontal_split",
-        opts = { vertical = false, },
-        desc = "水平分割で開く",
+        -- 垂直分割で開く
+        ["<leader>sv"] = {
+          "actions.select",
+          opts = {
+            vertical = true,
+          },
+          desc = "垂直分割で開く",
+        },
+
+        -- 水平分割で開く
+        ["<leader>sh"] = {
+          "actions.select",
+          opts = {
+            horizontal = true,
+          },
+          desc = "水平分割で開く",
+        },
       },
     },
 
-    -- Normalモードで - を押すと親ディレクトリへ移動
     keys = {
       {
         "<leader>e",
-        "<CMD>Oil<CR>",
+        "<cmd>Oil<cr>",
         desc = "Oilを開く",
       },
       {
         "-",
-        "<CMD>Oil<CR>",
+        "<cmd>Oil<cr>",
         desc = "親ディレクトリを開く",
       },
     },
