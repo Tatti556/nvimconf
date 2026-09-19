@@ -15,8 +15,8 @@ end
 local function mode_theme(accent)
   return {
     a = { bg = accent, fg = "#001419" },
-    b = { bg = "#002c38", fg = accent },
-    c = { bg = "#002c38", fg = "#839496" },
+    b = { bg = "#1a1a22", fg = accent },
+    c = { bg = "#1a1a22", fg = "#839496" },
   }
 end
 
@@ -35,6 +35,23 @@ local function current_mode_accent()
   return mode_accents[vim.fn.mode(1):sub(1, 1)] or mode_accents.n
 end
 
+-- 左側の輪郭線を現在のモード色に追従させる。
+local function left_divider()
+  return {
+    function()
+      return ""
+    end,
+    color = function()
+      return {
+        bg = "#1a1a22",
+        fg = current_mode_accent(),
+      }
+    end,
+    padding = 0,
+    separator = "",
+  }
+end
+
 local function right_divider()
   return {
     function()
@@ -42,7 +59,7 @@ local function right_divider()
     end,
     color = function()
       return {
-        bg = "#002c38",
+        bg = "#1a1a22",
         fg = current_mode_accent(),
       }
     end,
@@ -83,9 +100,9 @@ local mozumasu_solarized_osaka = {
   replace = mode_theme("#db302d"),
   terminal = mode_theme("#849900"),
   inactive = {
-    a = { bg = "#002c38", fg = "#576d74" },
-    b = { bg = "#002c38", fg = "#576d74" },
-    c = { bg = "#002c38", fg = "#576d74" },
+    a = { bg = "#1a1a22", fg = "#576d74" },
+    b = { bg = "#1a1a22", fg = "#576d74" },
+    c = { bg = "#1a1a22", fg = "#576d74" },
   },
 }
 
@@ -104,19 +121,33 @@ return {
         theme = mozumasu_solarized_osaka,
         globalstatus = true,
         component_separators = {
-          left = "",
-          right = "",
+          left = "",
+          right = "",
         },
         section_separators = {
-          left = "",
+          left = "",
           right = "",
         },
       },
 
       sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch" },
+        lualine_a = {
+          {
+            "mode",
+            separator = {
+              left = "",
+              right = "",
+            },
+          },
+        },
+        lualine_b = {
+          {
+            "branch",
+            separator = "",
+          },
+        },
         lualine_c = {
+          left_divider(),
           {
             function()
               return "󱉭 " .. project_name()
@@ -132,6 +163,7 @@ return {
               hint = "󰌵 ",
             },
           },
+          left_divider(),
           {
             "filetype",
             icon_only = true,
