@@ -13,6 +13,29 @@ return {
       -- wave / dragon / lotus
       theme = "wave",
 
+      -- WezTerm の背景を表示しつつ、Kanagawa の前景色を維持する
+      transparent = true,
+      terminalColors = true,
+
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = "none",
+            },
+          },
+        },
+      },
+
+      -- フローティングウィンドウも端末背景になじませる
+      overrides = function()
+        return {
+          NormalFloat = { bg = "none" },
+          FloatBorder = { bg = "none" },
+          FloatTitle = { bg = "none" },
+        }
+      end,
+
       background = {
         dark = "wave",
         light = "lotus",
@@ -25,5 +48,3 @@ return {
     end,
   },
 }
-
-
