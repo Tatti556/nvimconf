@@ -33,6 +33,8 @@ return {
           NormalFloat = { bg = "none" },
           FloatBorder = { bg = "none" },
           FloatTitle = { bg = "none" },
+          -- Kanagawa が設定するタブの未使用領域も透過する
+          TabLineFill = { bg = "none" },
         }
       end,
 
