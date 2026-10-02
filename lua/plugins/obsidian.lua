@@ -15,7 +15,7 @@ return {
     -- Enterでは既存のチェックボックスのみ切り替え、新規作成しない
     checkbox = {
       create_new = false,
-      order = { " ", "x" },
+      order = { " ", "/", "x", "-" },
     },
 
     ----------------------------------------
@@ -26,6 +26,10 @@ return {
       {
         name = "personal",
         path = "C:/Users/tatti/Documents/Obsidan_DATA/2607_vault",
+      },
+      {
+        name = "00_docs",
+        path = "C:/Users/tatti/Documents/Projects/00_docs",
       },
     },
 

@@ -21,6 +21,11 @@ return {
       -- ディレクトリを開いたとき、Oilを使う
       default_file_explorer = true,
 
+      -- git status表示用にsigncolumnを2列確保
+      win_options = {
+        signcolumn = "yes:2",
+      },
+
       -- 表示する列
       columns = {
         "icon",
@@ -71,5 +76,42 @@ return {
         desc = "親ディレクトリを開く",
       },
     },
+  },
+  {
+    "refractalize/oil-git-status.nvim",
+    dependencies = { "stevearc/oil.nvim" },
+    cond = not vim.g.vscode,
+    ft = "oil",
+    config = function()
+      require("oil-git-status").setup({
+        show_ignored = true, -- Display files ignored by Git
+        symbols = {
+          -- 画像の指定に合わせる。C / U のみ Nerd Font、私用領域グリフ使用
+          -- それ以外は Nerd Font に収録済みの Unicode で再現
+          index = {
+            ["A"] = "+", -- Added
+            ["D"] = "◀", -- Deleted
+            ["M"] = "•", -- Modified
+            ["R"] = "→", -- Renamed
+            ["C"] = "󰆏", -- Copied (Nerd Font md-content_copy)
+            ["T"] = "⊡", -- Type changed
+            ["U"] = "󰘭", -- Unmerged (Nerd Font md-source_merge)
+            ["?"] = "?", -- Untracked
+            ["!"] = "☒", -- Ignored
+          },
+          working_tree = {
+            ["A"] = "+", -- Added
+            ["D"] = "◀", -- Deleted
+            ["M"] = "•", -- Modified
+            ["R"] = "→", -- Renamed
+            ["C"] = "󰆏", -- Copied (Nerd Font md-content_copy)
+            ["T"] = "⊡", -- Type changed
+            ["U"] = "󰘭", -- Unmerged (Nerd Font md-source_merge)
+            ["?"] = "?", -- Untracked
+            ["!"] = "☒", -- Ignored
+          },
+        },
+      })
+    end,
   },
 }
